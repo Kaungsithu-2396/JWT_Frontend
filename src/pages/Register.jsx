@@ -10,22 +10,29 @@ function Register() {
         password: "",
         cf_password: "",
     });
-    console.log(isMobile);
+    const onChangeHandler = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }));
+    };
+    const onSubmitHandler = () => {};
     const { name, email, password, cf_password } = formData;
     return (
         <>
             <div className="flex justify-center items-center flex-col">
                 <section className="mt-5">
-                    <div className="flex justify-center items-center text-4xl">
+                    <div className="flex justify-center items-center text-4xl gap-3">
                         <FaUser />
+                        Register
                     </div>
-                    <h1 className="text-2xl my-6 text-black/70  ">
+                    <h1 className="text-2xl my-6 text-black/70 cursor-default  ">
                         Account Registration
                     </h1>
                 </section>
                 <br />
                 <section>
-                    <form action="">
+                    <form action="" onSubmit={onSubmitHandler}>
                         <div className="relative mt-5">
                             <input
                                 type="email"
@@ -34,6 +41,7 @@ function Register() {
                                 size={isMobile ? 34 : 50}
                                 placeholder="Enter your Email"
                                 className=" pl-10 py-4 border border-black/20 rounded-md"
+                                onChange={onChangeHandler}
                             />
                             <div className="absolute top-[1.25rem] left-4 ">
                                 <MdEmail />
@@ -47,6 +55,7 @@ function Register() {
                                 size={isMobile ? 34 : 50}
                                 placeholder="Enter your name"
                                 className=" pl-10 py-4 border border-black/20 rounded-md"
+                                onChange={onChangeHandler}
                             />
                             <div className="absolute top-[1.25rem] left-4 ">
                                 <FaUser />
@@ -60,6 +69,7 @@ function Register() {
                                 size={isMobile ? 34 : 50}
                                 placeholder="Enter your Password"
                                 className=" pl-10 py-4 border border-black/20 rounded-md"
+                                onChange={onChangeHandler}
                             />
                             <div className="absolute top-[1.25rem] left-4 ">
                                 <RiLockPasswordLine />
@@ -73,6 +83,7 @@ function Register() {
                                 size={isMobile ? 34 : 50}
                                 placeholder="Confirm your password"
                                 className=" pl-10 py-4 border border-black/20 rounded-md"
+                                onChange={onChangeHandler}
                             />
                             <div className="absolute top-[1.25rem] left-4 ">
                                 <RiLockPasswordLine />
@@ -81,7 +92,7 @@ function Register() {
                         <div className="mt-5 text-center">
                             <button
                                 type="Submit"
-                                className="border border-black px-5 py-2 rounded-md hover:bg-black/60 hover:text-white hover:scale-105 duration-200  delay-150"
+                                className="border border-black px-5 py-2 rounded-md bg-black text-white w-full hover:font-bold  duration-200  delay-150"
                             >
                                 Submit
                             </button>
