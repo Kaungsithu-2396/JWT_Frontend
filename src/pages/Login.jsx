@@ -16,7 +16,6 @@ function Login() {
     };
     const onSubmitHandler = () => {};
     const { email, password } = formData;
-    console.log(formData);
     return (
         <>
             <div className="flex justify-center items-center flex-col">
