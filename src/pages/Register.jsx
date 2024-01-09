@@ -28,13 +28,12 @@ function Register() {
     );
     useEffect(() => {
         if (isError) {
-            console.log(message);
-        } else {
-            dispatch(resetInfo());
+            alert(message);
         }
         if (isSuccess && user) {
             navigate("/");
         }
+        dispatch(resetInfo());
     }, [user, isError, isLoading, isSuccess, message]);
     const onSubmitHandler = (e) => {
         e.preventDefault();
