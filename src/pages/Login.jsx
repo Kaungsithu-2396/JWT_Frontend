@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSignInAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { isMobile } from "react-device-detect";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { login } from "../app/features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { resetInfo } from "../app/features/auth/authSlice";
 function Login() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -14,8 +20,26 @@ function Login() {
             [e.target.name]: e.target.value,
         }));
     };
-    const onSubmitHandler = () => {};
     const { email, password } = formData;
+    const { user, isLoading, isSuccess, isError, message } = useSelector(
+        (state) => state.auth
+    );
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        const userData = { email, password };
+        console.log(userData);
+        dispatch(login(userData));
+    };
+    useEffect(() => {
+        if (isError) {
+            alert(message);
+        }
+        if (isSuccess && user) {
+            navigate("/");
+        }
+        dispatch(resetInfo());
+    }, [isLoading, isSuccess, isError]);
+
     return (
         <>
             <div className="flex justify-center items-center flex-col">
